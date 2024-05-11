@@ -747,6 +747,312 @@ dweep''','Puducherry')
         clr_btn=Button(frame_3,text='CLEAR',width=10,command=clr_entry,cursor='hand2')
         clr_btn.place(x=295,y=5)
 
+    def utilities():
+        frame_5=Frame(hm,bd=3,bg='dark turquoise',width=655,height=45)
+        frame_5.place(x=310,y=105)
+
+        def age_calculator():
+            def clear_entry() :
+                    bd_e.delete(0, END)
+                    bm_e.delete(0, END)
+                    by_e.delete(0, END)
+                    gd_e.delete(0, END)
+                    gm_e.delete(0, END)
+                    gy_e.delete(0, END)
+                    cd_cal.configure(text='')
+
+            # function for checking error
+            def checkError():
+                if (bd_e.get() == "" or bm_e.get() == ""
+                    or by_e.get() == "" or gd_e.get() == ""
+                    or gm_e.get() == "" or gy_e.get() == ""):
+                    messagebox.showerror("Input Error",parent=ac_w)
+                    clear_entry()
+                    return -1
+
+            def Age_cal():
+                value = checkError()
+                if value ==  -1:
+                    return
+                
+                else :
+                    b_d = int(bd_e.get())
+                    b_m = int(bm_e.get())
+                    b_y = int(by_e.get())
+
+                    g_d= int(gd_e.get())
+                    g_m = int(gm_e.get())
+                    g_y = int(gy_e.get())
+                            
+                    m =[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+                    
+                    if (b_d > g_d):
+                        g_m = g_m-1
+                        g_d = g_d + m[b_m-1]
+
+                    if (b_m > g_m):
+                        g_y = g_y-1
+                        g_m = g_m+12
+                                
+                    # calculate 
+                    cal_d = g_d - b_d;
+                    cal_m = g_m - b_m;
+                    cal_y = g_y - b_y;
+                    
+                    op='Age is '+str(cal_d)+' days , '+str(cal_m)+' months , '+str(cal_y)+' years. '
+                    cd_cal.configure(text=op)
+                    
+            ac_w = Tk()
+            ac_w.configure(background = "slateblue1")
+            ac_w.geometry("250x520+450+150")
+            ac_w.overrideredirect(1)
+
+            pw_b1=Button(ac_w, text=' X ', command=ac_w.destroy,relief=SOLID,bg='tomato',cursor='hand2')
+            pw_b1.place(x=225,y=5)
+            
+            lbl = Label(ac_w, text = "  Age  Calculator  ",font = 'Verdana 12', bg = "slateblue1")
+            
+            dob = Label(ac_w, text = "Date Of Birth", bg = "green yellow")
+
+            gDate = Label(ac_w, text = "To Date", bg = "green yellow")
+
+            bd = Label(ac_w, text = "Birth Date", bg = "slateblue1")
+            bm = Label(ac_w, text = "Birth Month", bg = "slateblue1")
+            by = Label(ac_w, text = "Birth Year", bg = "slateblue1")
+
+            gd = Label(ac_w, text = "To Date", bg = "slateblue1")
+            gm = Label(ac_w, text = "To Month", bg = "slateblue1")
+            gy = Label(ac_w, text = "To Year", bg = "slateblue1")
+
+            bd_e = Entry(ac_w)
+            bm_e = Entry(ac_w)
+            by_e = Entry(ac_w)
+            
+            gd_e = Entry(ac_w)
+            gm_e = Entry(ac_w)
+            gy_e = Entry(ac_w)
+            
+            cd_cal = Label(ac_w,bg = "slateblue1",)
+
+            lh_9=Label(ac_w,bg='slateblue1')
+            lh_9.pack()
+
+            lbl.pack()
+            
+            lh_9=Label(ac_w,bg='slateblue1')
+            lh_9.pack()
+        
+            dob.pack()
+            
+            bd.pack()
+            bd_e.pack()
+            
+            bm.pack()
+            bm_e.pack()
+            
+            by.pack()
+            by_e.pack()
+
+            lh_9=Label(ac_w,bg='slateblue1')
+            lh_9.pack()
+            
+            gDate.pack()
+            
+            gd.pack()
+            gd_e.pack()
+            
+            gm.pack()
+            gm_e.pack()
+            
+            gy.pack()
+            gy_e.pack()
+
+            lh_9=Label(ac_w,bg='slateblue1')
+            lh_9.pack()
+
+            calc_age = Button(ac_w, text = "Calculate", font=('Calibri',12),fg = "Black",
+                              bg = "Green yellow", command = Age_cal,cursor='hand2')
+            calc_age.pack()
+
+            Label(ac_w, bg = "slateblue1").pack()
+            
+            cd_cal.pack()
+
+            Label(ac_w, bg = "slateblue1").pack()
+            
+            clr_e = Button(ac_w, text = "Clear Entry",font=('Calibri',12),
+                           fg = "Black", bg = "Red", command = clear_entry,cursor='hand2')
+            clr_e.pack()
+            
+            ac_w.mainloop()
+
+        def calender():
+            cdr = Toplevel()
+            cdr.geometry("262x260+530+150")
+            cdr.configure(bg='lemon chiffon')
+            cdr.overrideredirect(1)
+
+            cadr_label=Label(cdr,text=' CALENDAR ',font=('Bahnschrift SemiCondensed',19,'bold'),
+                             bg='lemon chiffon',foreground='red')
+            cadr_label.pack()
+            
+            cal = Calendar(cdr, selectmode = 'day',date_pattern='dd-mm-y')
+            cal.place(x=5,y=35)
+
+            def c_ch(ev):
+                cl['background']='tomato'
+            def c_ch_back(ev):
+                cl['background']='SystemButtonFace'
+                
+            cl=Button(cdr, text = "Close",command = cdr.destroy,activebackground='tomato',cursor='hand2')
+            cl.place(x=110,y=225)
+            cl.bind('<Enter>',c_ch)
+            cl.bind('<Leave>',c_ch_back)
+
+        def calculator():
+            calc=Toplevel()
+            calc.geometry('320x350+500+150')
+            calc.configure(bg='dark orange')
+            calc.overrideredirect(1)
+
+            def btn_click(item):
+                global expression
+                expression+=item
+                input_field.delete(0,END)
+                input_field.insert(END,expression)
+
+            def bt_clear(expression):
+                input_field.delete(0,END)
+                expression=''
+
+            def bt_equal(expression):
+                result=str(eval(input_field.get()))
+                input_field.delete(0,END)
+                input_field.insert(END,result)
+                expression=''
+
+            global expression
+            expression=''
+
+            input_text=StringVar()
+            
+            cal_label=Label(calc,text=' CALCULATOR ',font=('Bahnschrift SemiCondensed',24,'bold'),
+                            bg='dark orange',foreground='purple')
+            cal_label.pack()
+
+            pw_b4=Button(calc, text=' X ', command=calc.destroy, relief=SOLID, bg='tomato', cursor='hand2')
+            pw_b4.place(x=290,y=7)
+
+            global input_field
+            input_field=Entry(calc,text='',font=('Calibri',18,'bold'),bd=2,relief=GROOVE,
+                              textvariable=input_text,width=24,justify=RIGHT)
+            input_field.place(x=12,y=45)
+
+            clr=Button(calc,text='Clear',cursor='hand2',width=27,height=2,relief=GROOVE,
+                       font=('Calibri',12,'bold'),command=lambda:bt_clear(expression))
+            clr.place(x=11,y=80)
+            
+            div=Button(calc,text='/',cursor='hand2',width=8,height=2,relief=GROOVE,
+                       font=('Calibri',12,'bold'),command=lambda:btn_click('/'))
+            div.place(x=233,y=80)
+
+            seven=Button(calc,text='7',cursor='hand2',width=8,height=2,relief=GROOVE,
+                         font=('Calibri',12,'bold'),command=lambda:btn_click('7'))
+            seven.place(x=11,y=132)
+
+            eight=Button(calc,text='8',cursor='hand2',width=8,height=2,relief=GROOVE,
+                         font=('Calibri',12,'bold'),command=lambda:btn_click('8'))
+            eight.place(x=85,y=132)
+
+            nine=Button(calc,text='9',cursor='hand2',width=8,height=2,relief=GROOVE,
+                        font=('Calibri',12,'bold'),command=lambda:btn_click('9'))
+            nine.place(x=159,y=132)
+
+            mtpy=Button(calc,text='*',cursor='hand2',width=8,height=2,relief=GROOVE,
+                        font=('Calibri',12,'bold'),command=lambda:btn_click('*'))
+            mtpy.place(x=233,y=132)
+
+            four=Button(calc,text='4',cursor='hand2',width=8,height=2,relief=GROOVE,
+                        font=('Calibri',12,'bold'),command=lambda:btn_click('4'))
+            four.place(x=11,y=184)
+
+            five=Button(calc,text='5',cursor='hand2',width=8,height=2,relief=GROOVE,
+                        font=('Calibri',12,'bold'),command=lambda:btn_click('5'))
+            five.place(x=85,y=184)
+
+            six=Button(calc,text='6',cursor='hand2',width=8,height=2,relief=GROOVE,
+                       font=('Calibri',12,'bold'),command=lambda:btn_click('6'))
+            six.place(x=159,y=184)
+
+            sub=Button(calc,text='-',cursor='hand2',width=8,height=2,relief=GROOVE,
+                       font=('Calibri',12,'bold'),command=lambda:btn_click('-'))
+            sub.place(x=233,y=184)
+
+            one=Button(calc,text='1',cursor='hand2',width=8,height=2,relief=GROOVE,
+                       font=('Calibri',12,'bold'),command=lambda:btn_click('1'))
+            one.place(x=11,y=236)
+
+            two=Button(calc,text='2',cursor='hand2',width=8,height=2,relief=GROOVE,
+                       font=('Calibri',12,'bold'),command=lambda:btn_click('2'))
+            two.place(x=85,y=236)
+
+            three=Button(calc,text='3',cursor='hand2',width=8,height=2,relief=GROOVE,
+                         font=('Calibri',12,'bold'),command=lambda:btn_click('3'))
+            three.place(x=159,y=236)
+
+            plus=Button(calc,text='+',cursor='hand2',width=8,height=2,relief=GROOVE,
+                        font=('Calibri',12,'bold'),command=lambda:btn_click('+'))
+            plus.place(x=233,y=236)
+
+            zero_2x=Button(calc,text='00',cursor='hand2',width=8,height=2,relief=GROOVE,
+                           font=('Calibri',12,'bold'),command=lambda:btn_click('00'))
+            zero_2x.place(x=11,y=288)
+
+            zero=Button(calc,text='0',cursor='hand2',width=8,height=2,relief=GROOVE,
+                        font=('Calibri',12,'bold'),command=lambda:btn_click('0'))
+            zero.place(x=85,y=288)
+
+            dot=Button(calc,text='.',cursor='hand2',width=8,height=2,relief=GROOVE,
+                       font=('Calibri',12,'bold'),command=lambda:btn_click('.'))
+            dot.place(x=159,y=288)
+
+            equal=Button(calc,text=' = ',cursor='hand2',width=8,height=2,relief=GROOVE,
+                         font=('Calibri',12,'bold'),command=lambda:bt_equal(expression))
+            equal.place(x=233,y=288)
+
+            calc.mainloop()
+
+        def support():
+            sp=Frame(hm,width=30,height=20,bg='lightseagreen')
+            sp.place(x=850,y=150)
+
+            ctc=Label(sp,text=' Contact ',font=10,bg='lightseagreen')
+            ctc.pack()
+
+            ct=Label(sp,text=''' Call us : 8275711340  
+             9096195735''',bg='lightseagreen')
+            ct.pack()
+
+            em=Label(sp,text=' Mail us : softwares@.com',bg='lightseagreen')
+            em.pack()
+
+            pw_b4=Button(sp, text=' X ', command=sp.destroy, relief=SOLID, bg='white',fg='red', cursor='hand2')
+            pw_b4.place(x=137,y=2)
+
+        label_utl=Label(frame_5,text=' Utilities          :         ',bg='dark turquoise',font=('Calibri',14,'bold'))
+        label_utl.place(x=8,y=6)
+
+        calculator=Button(frame_5,text=' Calculator ',command=calculator,relief=SOLID,cursor='hand2')
+        calculator.place(x=440,y=6)
+
+        ag_cal=Button(frame_5,text=' Age Calculator ',command=age_calculator,relief=SOLID,cursor='hand2')
+        ag_cal.place(x=170,y=6)
+
+        cal_r=Button(frame_5,text=' Calendar ',command=calender,relief=SOLID,cursor='hand2')
+        cal_r.place(x=320,y=6)
+
+        spt=Button(frame_5,text=' Support ',command=support,relief=SOLID,cursor='hand2')
+        spt.place(x=570,y=6)
 
 
 def signup():
