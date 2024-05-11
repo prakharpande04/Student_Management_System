@@ -394,14 +394,360 @@ dweep''','Puducherry')
 
         acw.mainloop()
         
-        
-        
-        acc=PhotoImage(file='download - Copy.png')
-        acc_b=Button(hm, image=acc, command=acc_rec,height=25,width=25,relief=SOLID,cursor='hand2')
-        acc_b.place(x=1145,y=30)
-        t.bind_widget(acc_b,balloonmsg='User Account')
+    acc=PhotoImage(file='download - Copy.png')
+    acc_b=Button(hm, image=acc, command=acc_rec,height=25,width=25,relief=SOLID,cursor='hand2')
+    acc_b.place(x=1145,y=30)
+    t.bind_widget(acc_b,balloonmsg='User Account')
 
-        cal_logo=PhotoImage(file='cal_logo.png')
+    cal_logo=PhotoImage(file='cal_logo.png')
+    
+    def std_data():
+        frame_1=Frame(hm,bg='cyan',height=550,width=450,relief=GROOVE)
+        frame_1.place(x=27,y=200)
+
+        label_2=Label(frame_1,bg='white',font=('Calibri',12),text='Student Data : ',relief=SOLID)
+        label_2.place(x=15,y=10)
+
+        label_3=Label(frame_1,bg='white',font=('Calibri',12),text=' Unique Student ID ',relief=SOLID)
+        label_3.place(x=15,y=50)
+
+        label_4=Label(frame_1,bg='white',font=('Calibri',12),text=' Student Name ',relief=SOLID)
+        label_4.place(x=15,y=80)
+
+        label_5=Label(frame_1,bg='white',font=('Calibri',12),text=' Admission No. ',relief=SOLID)
+        label_5.place(x=15,y=110)
+
+        label_6=Label(frame_1,bg='white',font=('Calibri',12),text=' Admission Date ',relief=SOLID)
+        label_6.place(x=15,y=140)
+
+        label_7=Label(frame_1,bg='white',font=('Calibri',12),text=' Date of Birth ',relief=SOLID)
+        label_7.place(x=15,y=170)
+
+        label_8=Label(frame_1,bg='white',font=('Calibri',12),text=' Gender ',relief=SOLID)
+        label_8.place(x=15,y=200)
+
+        label_9=Label(frame_1,bg='white',font=('Calibri',12),text=' Class ',relief=SOLID)
+        label_9.place(x=15,y=230)
+
+        label_10=Label(frame_1,bg='white',font=('Calibri',12),text=" Father's Name ",relief=SOLID)
+        label_10.place(x=15,y=260)
+
+        label_11=Label(frame_1,bg='white',font=('Calibri',12),text=" Mother's Name ",relief=SOLID)
+        label_11.place(x=15,y=290)
+
+        label_12=Label(frame_1,bg='white',font=('Calibri',12),text=' Aadhar No. ',relief=SOLID)
+        label_12.place(x=15,y=320)
+
+        label_13=Label(frame_1,bg='white',font=('Calibri',12),text=' Address ',relief=SOLID)
+        label_13.place(x=15,y=357)
+
+        label_14=Label(frame_1,bg='white',font=('Calibri',12),text=' Contact No. ',relief=SOLID)
+        label_14.place(x=15,y=397)
+
+        label_15=Label(frame_1,bg='white',font=('Calibri',12),text=' Email ID ',relief=SOLID)
+        label_15.place(x=15,y=427)
+
+        label_16=Label(frame_1,bg='white',font=('Calibri',12),text=' Mother Tongue ',relief=SOLID)
+        label_16.place(x=15,y=457)
+
+        def add_recs():
+            global frame_2
+            e1=ent1.get()
+            e2=ent2.get()
+            e3=ent3.get()
+            e4=ent4.get()
+            e5=ent5.get()
+            e6=ent6.get()
+            e7=ent7.get()
+            e8=ent8.get()
+            e9=ent9.get()
+            e10=ent10.get()
+            e11=ent11.get('1.0',END)
+            e12=ent12.get()
+            e13=ent13.get()
+            e14=ent14.get()
+
+            import mysql.connector as c2
+            conn2=c2.connect(host='localhost',user='root',
+                        passwd='pp1801',database='student_mgmt')
+            mycur2=conn2.cursor()
+            mycur2.execute("""INSERT INTO STD_DETAILS VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}',
+                                            '{}','{}','{}','{}')""".format(e1,e2,e3,e4,e5,e6,e7,e8,e9,e10,e11,e12,e13,e14))
+            conn2.commit()
+
+            messagebox.showinfo('Success','Record Added Successfully !',parent=frame_2)
+
+            ent1.delete(0,END)
+            ent2.delete(0,END)
+            ent3.delete(0,END)
+            ent4.delete(0,END)
+            ent5.delete(0,END)
+            ent6.delete(0,END)
+            ent7.delete(0,END)
+            ent8.delete(0,END)
+            ent9.delete(0,END)
+            ent10.delete(0,END)
+            ent11.delete('1.0',END)
+            ent12.delete(0,END)
+            ent13.delete(0,END)
+            ent14.delete(0,END)
+
+            global trvw
+            trvw.delete(*trvw.get_children())
+            import mysql.connector as c3
+            conn3=c3.connect(host='localhost',user='root',
+                        passwd='pp1801',database='student_mgmt')
+            mycur3=conn3.cursor()
+            mycur3.execute('SELECT * FROM STD_DETAILS;')
+            data=mycur3.fetchall()
+            
+            for i in data:
+                trvw.insert('',1,text='',values=(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13]))
+
+        usidvalue=StringVar()
+        usnamevalue=StringVar()
+        admnovalue=StringVar()
+        admdtvalue=StringVar()
+        dobvalue=StringVar()
+        gndvalue=StringVar()
+        clsvalue=StringVar()
+        uidvalue=StringVar()
+        fnamevalue=StringVar()
+        mnamevalue=StringVar()
+        cnovalue=StringVar()
+        mailvalue=StringVar()
+        mtngvalue=StringVar()
+
+        global ent1,ent2,ent3,ent4,ent5,ent6,ent7,ent8,ent9,ent10,ent11,ent12,ent13,ent14
+        ent1 = Entry(frame_1,font=('Calibri',12),textvariable=usidvalue,width=27)
+        ent1.place(x=175,y=50)
+
+        ent2 = Entry(frame_1,font=('Calibri',12),textvariable=usnamevalue,width=27)
+        ent2.place(x=175,y=80)
+
+        ent3 = Entry(frame_1,font=('Calibri',12),textvariable=admnovalue,width=27)
+        ent3.place(x=175,y=110)
+
+        ent4 = Entry(frame_1,font=('Calibri',12),textvariable=admdtvalue,width=27)
+        ent4.place(x=175,y=140)
+
+        def calender1():
+            cdr1 = Toplevel()
+            cdr1.geometry("255x220+450+250")
+            cdr1.overrideredirect(1)
+     
+            cal1 = Calendar(cdr1, selectmode = 'day',date_pattern='dd-mm-y')
+            cal1.place(x=2,y=2)
+
+            def get_date():
+                global ent4
+                ent4.delete(0,END)
+                ent4.insert(0,cal1.get_date())
+                cdr1.destroy()
+                
+            Button(cdr1, text = "Get Date",
+                        command = get_date,cursor='hand2').place(x=100,y=190)
+            cdr1.mainloop()
+            
+        global win1,win2
+        win1=Toplevel()
+        win1.geometry('21x21+425+342')
+        win1.overrideredirect(1)
+        win1.attributes('-topmost',True)
+        
+        admcal=Button(win1,image=cal_logo,command=calender1,cursor='hand2')
+        admcal.pack()
+        
+        ent5 = Entry(frame_1,font=('Calibri',12),textvariable=dobvalue,width=27)
+        ent5.place(x=175,y=170)
+
+        def calender2():
+            cdr2 = Toplevel()
+            cdr2.geometry("255x220+450+283")
+            cdr2.overrideredirect(1)
+
+            cal2 = Calendar(cdr2, selectmode = 'day',date_pattern='dd-mm-y')
+            cal2.place(x=2,y=2)
+            
+            def get_date():
+                global ent5
+                ent5.delete(0,END)
+                ent5.insert(0,cal2.get_date())
+                cdr2.destroy()
+
+            Button(cdr2, text = "Get Date",
+                        command = get_date,cursor='hand2').place(x=100,y=190)
+            cdr2.mainloop()
+
+        win2=Toplevel()
+        win2.geometry('21x21+425+372')
+        win2.overrideredirect(1)
+        win2.attributes('-topmost',True)
+        
+        dobcal=Button(win2,image=cal_logo,command=calender2,cursor='hand2')
+        dobcal.pack()
+
+        ent6=ttk.Combobox(frame_1,width=24,font=('Calibri',12),textvariable=gndvalue)
+        ent6['values']=('Male','Female','Others')
+        ent6.place(x=175,y=200)
+            
+        ent7 = Entry(frame_1,font=('Calibri',12),textvariable=clsvalue,width=27)
+        ent7.place(x=175,y=230)
+
+        ent8 = Entry(frame_1,font=('Calibri',12),textvariable=fnamevalue,width=27)
+        ent8.place(x=175,y=260)
+
+        ent9 = Entry(frame_1,font=('Calibri',12),textvariable=mnamevalue,width=27)
+        ent9.place(x=175,y=290)
+
+        ent10 = Entry(frame_1,font=('Calibri',12),textvariable=uidvalue,width=27)
+        ent10.place(x=175,y=320)
+
+        ent11 = Text(frame_1,width=27,height=2,font=('Calibri',12))
+        ent11.place(x=175,y=350)
+
+        ent12 = Entry(frame_1,font=('Calibri',12),textvariable=cnovalue,width=27)
+        ent12.place(x=175,y=397)
+
+        ent13 = Entry(frame_1,font=('Calibri',12),textvariable=mailvalue,width=27)
+        ent13.place(x=175,y=427)
+
+        ent14 = Entry(frame_1,font=('Calibri',12),textvariable=mtngvalue,width=27)
+        ent14.place(x=175,y=457)
+
+        def clr_entry():
+            ent1.delete(0,END)
+            ent2.delete(0,END)
+            ent3.delete(0,END)
+            ent4.delete(0,END)
+            ent5.delete(0,END)
+            ent6.delete(0,END)
+            ent7.delete(0,END)
+            ent8.delete(0,END)
+            ent9.delete(0,END)
+            ent10.delete(0,END)
+            ent11.delete('1.0',END)
+            ent12.delete(0,END)
+            ent13.delete(0,END)
+            ent14.delete(0,END)
+
+        def del_rec():
+            global frame_2
+            ans2=messagebox.askokcancel('Warning','Are you sure you want to delete ?',parent=frame_2)
+            if ans2:
+                del_id=ent1.get()
+
+                import mysql.connector as c4
+                conn4=c4.connect(host='localhost',user='root',
+                                passwd='pp1801',database='student_mgmt')
+                mycur4=conn4.cursor()
+                mycur4.execute("DELETE FROM STD_DETAILS WHERE UNIQUE_STUDENT_ID='{}';".format(del_id))
+                conn4.commit()
+
+                messagebox.showinfo('Success !','Record Deleted Successfully !',parent=frame_2)
+                clr_entry()
+
+                global trvw
+                trvw.delete(*trvw.get_children())
+                
+                conn5=c4.connect(host='localhost',user='root',
+                            passwd='pp1801',database='student_mgmt')
+                mycur5=conn5.cursor()
+                mycur5.execute('SELECT * FROM STD_DETAILS;')
+                data=mycur5.fetchall()
+
+                for i in data:
+                    trvw.insert('',1,text='',values=(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13]))
+
+        def update_recs():
+            e1=ent1.get()
+            e2=ent2.get()
+            e3=ent3.get()
+            e4=ent4.get()
+            e5=ent5.get()
+            e6=ent6.get()
+            e7=ent7.get()
+            e8=ent8.get()
+            e9=ent9.get()
+            e10=ent10.get()
+            e11=ent11.get('1.0',END)
+            e12=ent12.get()
+            e13=ent13.get()
+            e14=ent14.get()
+            
+            import mysql.connector as c6
+            conn6=c6.connect(host='localhost',user='root',
+                            passwd='pp1801',database='student_mgmt')
+            mycur6=conn6.cursor()
+            mycur6.execute("""UPDATE STD_DETAILS SET UNIQUE_STUDENT_ID='{}', STUDENT_NAME='{}',
+                                            ADMISSION_NO='{}', ADMISSION_DATE='{}', DATE_OF_BIRTH='{}', GENDER='{}',
+                                            CLASS='{}', FATHER_NAME='{}', MOTHER_NAME='{}', Aadhar_no='{}', Address='{}',
+                                            CONTACT_NO='{}', EMAIL='{}', Mother_Tongue='{}' WHERE UNIQUE_STUDENT_ID=
+                                            '{}';""".format(e1,e2,e3,e4,e5,e6,e7,e8,e9,e10,e11,e12,e13,e14,index))
+            conn6.commit()
+
+            global trvw
+            trvw.delete(*trvw.get_children())
+            import mysql.connector as c7
+            conn7=c7.connect(host='localhost',user='root',
+                        passwd='pp1801',database='student_mgmt')
+            mycur7=conn7.cursor()
+            mycur7.execute('SELECT * FROM STD_DETAILS;')
+            data=mycur7.fetchall()
+
+            ent1.delete(0,END)
+            ent2.delete(0,END)
+            ent3.delete(0,END)
+            ent4.delete(0,END)
+            ent5.delete(0,END)
+            ent6.delete(0,END)
+            ent7.delete(0,END)
+            ent8.delete(0,END)
+            ent9.delete(0,END)
+            ent10.delete(0,END)
+            ent11.delete('1.0',END)
+            ent12.delete(0,END)
+            ent13.delete(0,END)
+            ent14.delete(0,END)
+
+            for i in data:
+                trvw.insert('',1,text='',values=(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13]))
+            
+                
+
+        global frame_3
+        frame_3=Frame(frame_1,bd=3,bg='crimson',width=390,height=40)
+        frame_3.place(x=30,y=497)
+
+        add_btn=Button(frame_3,text='ADD',width=10,command=add_recs,cursor='hand2')
+        add_btn.place(x=10,y=5)
+
+        del_btn=Button(frame_3,text='DELETE',width=10,command=del_rec,cursor='hand2')
+        del_btn.place(x=105,y=5)
+
+        updt_btn=Button(frame_3,text='UPDATE',width=10,command=update_recs,cursor='hand2')
+        updt_btn.place(x=200,y=5)
+
+        def clr_entry():
+            ent1.delete(0,END)
+            ent2.delete(0,END)
+            ent3.delete(0,END)
+            ent4.delete(0,END)
+            ent5.delete(0,END)
+            ent6.delete(0,END)
+            ent7.delete(0,END)
+            ent8.delete(0,END)
+            ent9.delete(0,END)
+            ent10.delete(0,END)
+            ent11.delete('1.0',END)
+            ent12.delete(0,END)
+            ent13.delete(0,END)
+            ent14.delete(0,END)
+        
+        clr_btn=Button(frame_3,text='CLEAR',width=10,command=clr_entry,cursor='hand2')
+        clr_btn.place(x=295,y=5)
+
+
 
 def signup():
     def register():
