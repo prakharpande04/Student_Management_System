@@ -7,6 +7,30 @@ from tkinter import messagebox
 from tkcalendar import Calendar
 from tix import *
 
+def r_message_1():
+    global w1,register_screen
+    global lgn
+    messagebox.showinfo('Info',' Registered Successfully ! ',parent=w1)
+    register_screen.destroy()
+    login()
+            
+def l_message_1():
+    global lgn
+    messagebox.showinfo('Info',' Logged In Successfully ! ',parent=lgn)
+    lgn.destroy()
+    body()
+
+def l_message_2():
+    global lgn
+    messagebox.showinfo('Info',' Password Incorrect ! ',parent=lgn)
+    pas_entry.delete(0,END)
+
+def l_message_3():
+    global lgn
+    messagebox.showinfo('Info',' Username does not exist ! ',parent=lgn)
+    us_name_entry.delete(0,END)
+    pas_entry.delete(0,END)
+
 def signup():
     def register():
         global w1
