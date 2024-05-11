@@ -1054,6 +1054,185 @@ dweep''','Puducherry')
         spt=Button(frame_5,text=' Support ',command=support,relief=SOLID,cursor='hand2')
         spt.place(x=570,y=6)
 
+    def std_recs():
+        global frame_2
+        srcvalue=StringVar()
+        srcval=StringVar()
+
+        def search():
+            sb=label_18.get()
+            sf=src_e.get()
+
+            trvw.delete(*trvw.get_children())
+            
+            import mysql.connector as c9
+            conn9=c9.connect(host='localhost',user='root',
+                        passwd='pp1801',database='student_mgmt')
+            mycur9=conn9.cursor()
+            mycur9.execute("SELECT * FROM STD_DETAILS WHERE "+sb+" LIKE '%"+sf+"%';")
+            data=mycur9.fetchall()
+
+            for i in data:
+                trvw.insert('',1,text='',values=(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13]))
+                
+        
+        frame_2=Frame(hm,bg='cyan',height=580,width=850,relief=GROOVE)
+        frame_2.place(x=500,y=180)
+
+        dv_l=Label(frame_2,bg='cyan',text='Developed By : PD Software Developers',font=18)
+        dv_l.place(x=450,y=568)
+
+        label_17=Label(frame_2,text='Search By : ',bg='cyan',font=('Calibri',13,'bold'))
+        label_17.place(x=10,y=10)
+
+        label_18=ttk.Combobox(frame_2,font=('Calibri',10),state='readonly',width=20,
+                              textvariable=srcvalue,cursor='hand2')
+        label_18['values']=('Unique_Student_ID','Student_Name','Admission_No','Aadhar_No')
+        label_18.place(x=100,y=12)
+
+        src_e=Entry(frame_2,font=('Calibri',10,'bold'),textvariable=srcval,bd=2)
+        src_e.place(x=280,y=12)
+
+        src_btn=Button(frame_2,text='Search',width=9,command=search,cursor='hand2')
+        src_btn.place(x=445,y=10)
+
+        def show_all():
+            trvw.delete(*trvw.get_children())
+            import mysql.connector as c8
+            conn8=c8.connect(host='localhost',user='root',
+                        passwd='pp1801',database='student_mgmt')
+            mycur8=conn8.cursor()
+            mycur8.execute('SELECT * FROM STD_DETAILS;')
+            data=mycur8.fetchall()
+
+            for i in data:
+                trvw.insert('',1,text='',values=(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13]))
+            
+        shw_all=Button(frame_2,text='Show All',width=9,command=show_all,cursor='hand2')
+        shw_all.place(x=535,y=10)
+
+        def select_rec(ev):
+            global index
+            fc=trvw.focus()
+            get_val=trvw.item(fc,'values')
+
+            ent1.delete(0,END)
+            ent2.delete(0,END)
+            ent3.delete(0,END)
+            ent4.delete(0,END)
+            ent5.delete(0,END)
+            ent6.delete(0,END)
+            ent7.delete(0,END)
+            ent8.delete(0,END)
+            ent9.delete(0,END)
+            ent10.delete(0,END)
+            ent11.delete('1.0',END)
+            ent12.delete(0,END)
+            ent13.delete(0,END)
+            ent14.delete(0,END)
+
+            ent1.insert(END,get_val[0])
+            ent2.insert(END,get_val[1])
+            ent3.insert(END,get_val[2])
+            ent4.insert(END,get_val[3])
+            ent5.insert(END,get_val[4])
+            ent6.insert(END,get_val[5])
+            ent7.insert(END,get_val[6])
+            ent8.insert(END,get_val[7])
+            ent9.insert(END,get_val[8])
+            ent10.insert(END,get_val[9])
+            ent11.insert(END,get_val[10])
+            ent12.insert(END,get_val[11])
+            ent13.insert(END,get_val[12])
+            ent14.insert(END,get_val[13])
+
+            index=ent1.get()
+
+        frame_4=Frame(frame_2,bd=2,bg='navajo white',width=730,height=500)
+        frame_4.pack(padx=10,pady=50)
+        frame_4.pack_propagate(False)
+
+        st=Style()
+        st.configure('Treeview.Heading',font=('Bahnschrift SemiCondensed',14),foreground='red')
+        st.configure('Treeview',font=('Calibri',12))
+
+        hsb = Scrollbar(frame_4,orient='horizontal')
+        vsb = Scrollbar(frame_4,orient='vertical')
+
+        global trvw
+        trvw=ttk.Treeview(frame_4,show='headings',height=23,
+                          columns=('USI','SN','ANO','ADT','DOB','GD','CL','FN','MN','AN','AD','CN','ML','MT'))
+        
+        hsb.pack(side ='bottom',fill='both')
+        
+        vsb.pack(side='right',fill='both')
+
+        hsb.config(command=trvw.xview)
+        vsb.config(command=trvw.yview)
+
+        trvw.heading('USI',text=' Unique Student ID ')
+        trvw.heading('SN',text=' Student  Name ')
+        trvw.heading('ANO',text=' Admission No. ')
+        trvw.heading('ADT',text=' Admission Date ')
+        trvw.heading('DOB',text=' Date of Birth ')
+        trvw.heading('GD',text=' Gender ')
+        trvw.heading('CL',text=' Class ')
+        trvw.heading('FN',text=" Father's Name ")
+        trvw.heading('MN',text=" Mother's Name ")
+        trvw.heading('AN',text=' Aadhar No. ')
+        trvw.heading('AD',text=' Address ')
+        trvw.heading('CN',text=' Contact Number ')
+        trvw.heading('ML',text=' Email ID ')
+        trvw.heading('MT',text=' Mother Tongue ')
+
+        trvw.column('USI',width=150,minwidth=150,anchor=CENTER)
+        trvw.column('SN',width=260,minwidth=260,anchor=CENTER)
+        trvw.column('ANO',width=120,minwidth=120,anchor=CENTER)
+        trvw.column('ADT',width=130,minwidth=130,anchor=CENTER)
+        trvw.column('DOB',width=110,minwidth=110,anchor=CENTER)
+        trvw.column('GD',width=80,minwidth=80,anchor=CENTER)
+        trvw.column('CL',width=70,minwidth=70,anchor=CENTER)
+        trvw.column('FN',width=200,minwidth=200,anchor=CENTER)
+        trvw.column('MN',width=200,minwidth=200,anchor=CENTER)
+        trvw.column('AN',width=150,minwidth=150,anchor=CENTER)
+        trvw.column('AD',width=320,minwidth=320,anchor=CENTER)
+        trvw.column('CN',width=240,minwidth=240,anchor=CENTER)
+        trvw.column('ML',width=240,minwidth=240,anchor=CENTER)
+        trvw.column('MT',width=170,minwidth=170,anchor=CENTER)
+
+        trvw.bind('<ButtonRelease-1>',select_rec)
+
+        trvw.pack()
+
+        import mysql.connector as c1
+        conn=c1.connect(host='localhost',user='root',
+                        passwd='pp1801',database='student_mgmt')
+        mycur=conn.cursor()
+        mycur.execute('SELECT * FROM STD_DETAILS;')
+        
+        a=0
+        for i in mycur:
+            trvw.insert('',1,text='',values=(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13]))
+            a+=1
+            
+        trvw.configure(xscrollcommand = hsb.set)
+        trvw.configure(yscrollcommand=vsb.set)
+
+        def refresh():
+            trvw.delete(*trvw.get_children())
+            import mysql.connector as c3
+            conn=c3.connect(host='localhost',user='root',
+                        passwd='pp1801',database='student_mgmt')
+            mycur=conn.cursor()
+            mycur.execute("SELECT * FROM STD_DETAILS ORDER BY  UNIQUE_STUDENT_ID ASC;")
+            data=mycur.fetchall()
+
+            for i in data:
+                trvw.insert('',1,text='',values=(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13]))
+            
+        refsh=Button(frame_2,text='Refresh',width=9,command=refresh,cursor='hand2')
+        refsh.place(x=630,y=10)
+        
 
 def signup():
     def register():
