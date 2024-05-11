@@ -67,6 +67,17 @@ def body():
         tm_label.after(1000, clock)
         return formatted_now
     clock()
+    
+    t=Balloon(hm)    
+    hm_icn=PhotoImage(file='home_icon.png')
+    hmicn_btn=Button(hm, image=hm_icn,command=body,height=25,width=25,relief=SOLID,cursor='hand2')
+    hmicn_btn.place(x=1055,y=30)
+    t.bind_widget(hmicn_btn,balloonmsg='Home')
+
+    icf=PhotoImage(file='min1.png')
+    icf_btn=Button(hm, image=icf, command=hm.iconify,height=26,width=26,relief=SOLID,cursor='hand2')
+    icf_btn.place(x=1190,y=30)
+    t.bind_widget(icf_btn,balloonmsg='Minimize')
 
 def signup():
     def register():
