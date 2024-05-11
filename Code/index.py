@@ -48,6 +48,25 @@ def body():
     
     label_1=Label(hm,bg='cyan',bd=5,text=IN,font=('Cambria bold',30),relief=SOLID)
     label_1.place(x=250,y=14)
+    
+    def clock():
+        IST=timezone('Asia/Kolkata')
+        global hm
+        dt_label = Label(hm,bg='lime',text="Current Date", font = 'Verdana 12 bold')
+        dt_label.place(x=50, y=30)
+
+        tm_label = Label(hm,bg='lime',text="Current Time",font = 'Verdana 12')
+        tm_label.place(x=50, y=50)
+
+        raw_TS = datetime.now(IST)
+        cur_date = raw_TS.strftime("%d %b %Y")
+        cur_time = raw_TS.strftime("%H:%M:%S %p")
+        formatted_now = raw_TS.strftime("%d-%m-%Y")
+        dt_label.config(text = cur_date)
+        tm_label.config(text = cur_time)
+        tm_label.after(1000, clock)
+        return formatted_now
+    clock()
 
 def signup():
     def register():
