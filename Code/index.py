@@ -215,6 +215,111 @@ dweep''','Puducherry')
         global acw
         acw=Frame(hm,bg='gold',width=550,height=690)
         acw.place(x=460,y=90)
+        
+        def change_paswd():
+            def update_pas():
+                global ID
+                p1=e1.get()
+                p2=e2.get()
+                p3=e3.get()
+                
+                import mysql.connector as c
+                conn=c.connect(host='localhost',user='root',
+                           passwd='pp1801',database='student_mgmt')
+                mycur=conn.cursor()
+                mycur.execute("Select Password from credentials where username='{}';".format(ID))
+                data=mycur.fetchone()
+                op=data[0]
+
+                if op==p1:
+                    if p2==p3:
+                        mycur.execute("UPDATE CREDENTIALS SET Password='{}' where UserName='{}';".format(p2,ID))
+                        conn.commit()
+                        messagebox.showinfo('Success','Password Changed Successfully !',parent=frame_6)
+                        frame_6.destroy()
+                    else:
+                        messagebox.showinfo('Error','New passwords did not match !',parent=frame_6)
+                        e2.delete(0,END)
+                        e3.delete(0,END)
+                else:
+                    messagebox.showinfo('Error','Incorrect Current Password !',parent=frame_6)
+                    e1.delete(0,END)
+                    e2.delete(0,END)
+                    e3.delete(0,END)
+                
+            cpvalue=StringVar
+            npvalue=StringVar
+            cnpvalue=StringVar
+            
+            frame_6=Frame(acw,bg='purple1',width=400,height=300)
+            frame_6.place(x=60,y=195)
+
+            hd=Label(frame_6,text='Change Password',bg='purple1',font=('Calibri bold',19))
+            hd.place(x=110,y=12)
+
+            usr = Label(frame_6, text="Current Password * ",font=('Calibri',12),bg='purple1')
+            usr.place(x=20,y=65)
+            e1 = Entry(frame_6,font=('Calibri',12),textvariable=cpvalue,show='*')
+            e1.place(x=220,y=65)
+
+            def show_pas(event):
+                e1.configure(show='')
+            def hide_pas(event):
+                e1.configure(show='*')
+        
+            show1=Button(frame_6,text='👀',cursor='hand2',bg='purple1',font=10,
+                         relief=FLAT,activebackground='purple1',fg='black')
+            show1.place(x=360,y=63)
+
+            show1.bind('<ButtonPress-1>',show_pas)
+            show1.bind('<ButtonRelease-1>',hide_pas)
+
+            usr = Label(frame_6, text="New Password * ",font=('Calibri',12),bg='purple1')
+            usr.place(x=20,y=115)
+            e2 = Entry(frame_6,font=('Calibri',12),textvariable=npvalue,show='*')
+            e2.place(x=220,y=115)
+
+            def show_pas(event):
+                e2.configure(show='')
+            def hide_pas(event):
+                e2.configure(show='*')
+        
+            show2=Button(frame_6,text='👀',cursor='hand2',bg='purple1',font=10,
+                         relief=FLAT,activebackground='purple1',fg='black')
+            show2.place(x=360,y=113)
+
+            show2.bind('<ButtonPress-1>',show_pas)
+            show2.bind('<ButtonRelease-1>',hide_pas)
+
+            usr = Label(frame_6, text="Confirm New Password * ",font=('Calibri',12),bg='purple1')
+            usr.place(x=20,y=165)
+            e3 = Entry(frame_6,font=('Calibri',12),textvariable=cnpvalue,show='*')
+            e3.place(x=220,y=165)
+
+            def show_pas(event):
+                e3.configure(show='')
+            def hide_pas(event):
+                e3.configure(show='*')
+        
+            show3=Button(frame_6,text='👀',cursor='hand2',bg='purple1',font=10,
+                         relief=FLAT,activebackground='purple1',fg='black') 
+            show3.place(x=360,y=163)
+
+            show3.bind('<ButtonPress-1>',show_pas)
+            show3.bind('<ButtonRelease-1>',hide_pas)
+
+            b6=Button(frame_6,text="Save", width="16",font=('Calibri',12,'bold'),
+                      bg='cyan',cursor='hand2',relief=SOLID,command=update_pas)
+            b6.place(x=220,y=215)
+
+            b6=Button(frame_6,text="Cancel", width="17",font=('Calibri',12,'bold'),
+                      bg='cyan',cursor='hand2',relief=SOLID,command=frame_6.destroy)
+            b6.place(x=40,y=215)
+        
+        
+        
+        
+        
         acc=PhotoImage(file='download - Copy.png')
         acc_b=Button(hm, image=acc, command=acc_rec,height=25,width=25,relief=SOLID,cursor='hand2')
         acc_b.place(x=1145,y=30)
