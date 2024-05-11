@@ -80,6 +80,141 @@ def body():
     t.bind_widget(icf_btn,balloonmsg='Minimize')
     
     def acc_rec():
+        def usr_acc():
+            def update_acc():
+                global ac,e1,e3,e4,e5,e6,e7,e8,e9,e10,ID
+                UN=e1.get()
+                ANo=e3.get()
+                IN=e4.get()
+                IT=e5.get()
+                AD=e6.get()
+                ST=e7.get()
+                PC=e8.get()
+                EM=e9.get()
+                CNo=e10.get()
+                
+                import mysql.connector as c1
+                conn=c1.connect(host='localhost',user='root',passwd='pp1801',database='student_mgmt')
+                mycur=conn.cursor()
+                q="""UPDATE credentials SET UserName=%s,Aff_No=%s, Ins_name=%s, Ins_type=%s, Ins_Ad=%s,
+                    State=%s, PinCode=%s, Email=%s, Contact=%s  where UserName=%s;"""
+                v=(UN,ANo,IN,IT,AD,ST,PC,EM,CNo,ID)
+                mycur.execute(q,v)
+                ID=UN
+                conn.commit()
+
+            global ac
+            ac=Frame(hm,bg='chocolate1',width=430,height=490)
+            ac.place(x=520,y=200)
+
+            def pw_b1_fn():
+                ac.destroy()
+                acc_rec()
+                
+            pw_b1=Button(ac, text=' X ', command=pw_b1_fn,relief=SOLID,bg='tomato',cursor='hand2')
+            pw_b1.place(x=390,y=10)
+
+            usrvalue=StringVar()
+            pwdvalue=StringVar()
+            afnvalue=StringVar()
+            insvalue=StringVar()
+            ins_type=StringVar()
+            adtype=StringVar()
+            statetype=StringVar()
+            pintype=StringVar()
+            mailtype=StringVar()
+            cnotype=StringVar()
+            
+            global e1,e3,e4,e5,e6,e7,e8,e9,e10
+
+            epf=Label(ac,text='Edit  Profile',bg='chocolate1',font=('Calibri bold',20))
+            epf.place(x=120,y=10)
+            
+            usr = Label(ac, text="Username * ",font=('Calibri',12),bg='chocolate1')
+            usr.place(x=20,y=65)
+            e1 = Entry(ac,font=('Calibri',12),textvariable=usrvalue)
+            e1.place(x=220,y=65)
+
+            afn = Label(ac, text="Affilation Number * ",font=('Calibri',12),bg='chocolate1')
+            afn.place(x=20,y=100)
+            e3 = Entry(ac,font=('Calibri',12),textvariable=afnvalue)
+            e3.place(x=220,y=100)
+
+            ins = Label(ac, text="Institution Name * ",font=('Calibri',12),bg='chocolate1')
+            ins.place(x=20,y=135)
+            e4 = Entry(ac,font=('Calibri',12),textvariable=insvalue)
+            e4.place(x=220,y=135)
+
+            ins_type = Label(ac, text="Institution Type * ",font=('Calibri',12),bg='chocolate1')
+            ins_type.place(x=20,y=170)
+            e5 = ttk.Combobox(ac,font=('Calibri',12),width=15,textvariable=ins_type)
+            e5['values']=('Government','Government Aided','Cooperative','Private')
+            e5.place(x=220,y=170)
+
+            ad = Label(ac, text="Institution Address * ",font=('Calibri',12),bg='chocolate1')
+            ad.place(x=20,y=205)
+            e6 = Entry(ac,font=('Calibri',12),textvariable=adtype)
+            e6.place(x=220,y=205)
+
+            state = Label(ac, text="State * ",font=('Calibri',12),bg='chocolate1')
+            state.place(x=20,y=240)
+            e7 = ttk.Combobox(ac,font=('Calibri',12),width=15,textvariable=statetype)
+            e7['values']=('Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Goa','''
+Gujarat''','Haryana','Himachal Pradesh','Jharkhand','Karnataka','Kerala','''Madhya
+ Pradesh''','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','''Pun
+jab''','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttarakhand','''Uttar
+ Pradesh''','West Bengal',' ',' ','Andaman and Nicobar Islands','Chandigarh','''Dadra and
+ Nagar Haweli & Daman and Diu''','Delhi / NCR','Jammu and Kashmir','Ladakh','''Laksha
+dweep''','Puducherry')
+            e7.place(x=220,y=240)
+
+            pin = Label(ac, text="Pincode * ",font=('Calibri',12),bg='chocolate1')
+            pin.place(x=20,y=275)
+            e8 = Entry(ac,font=('Calibri',12),textvariable=pintype)
+            e8.place(x=220,y=275)
+
+            mail = Label(ac, text="Email ID * ",font=('Calibri',12),bg='chocolate1')
+            mail.place(x=20,y=310)
+            e9 = Entry(ac,font=('Calibri',12),textvariable=mailtype)
+            e9.place(x=220,y=310)
+
+            cno = Label(ac, text="Contact No.* ",font=('Calibri',12),bg='chocolate1')
+            cno.place(x=20,y=345)
+            e10 = Entry(ac,font=('Calibri',12),textvariable=cnotype)
+            e10.place(x=220,y=345)
+
+            import mysql.connector as c
+            conn=c.connect(host='localhost',user='root',
+                           passwd='pp1801',database='student_mgmt')
+            mycur=conn.cursor()
+            mycur.execute("Select * from credentials where UserName='{}' ;".format(ID))
+            get_val=mycur.fetchall()
+            
+            e1.insert(0,get_val[0][0])
+            e3.insert(0,get_val[0][2])
+            e4.insert(0,get_val[0][3])
+            e5.insert(0,get_val[0][4])
+            e6.insert(0,get_val[0][5])
+            e7.insert(0,get_val[0][6])
+            e8.insert(0,get_val[0][7])
+            e9.insert(0,get_val[0][8])
+            e10.insert(0,get_val[0][9])
+
+            conn.commit()
+
+            def CFB6():
+                update_acc()
+                messagebox.showinfo('Info',' Profile Updated Successfully ! ',parent=ac)
+                ac.destroy()
+                acc_rec()
+                
+            b6=Button(ac,text="Save", height="2", width="20",font=('Calibri',12,'bold'),
+                      bg='cyan',cursor='hand2',relief=SOLID,command=CFB6)
+            b6.place(x=110,y=410)
+        
+        global acw
+        acw=Frame(hm,bg='gold',width=550,height=690)
+        acw.place(x=460,y=90)
         acc=PhotoImage(file='download - Copy.png')
         acc_b=Button(hm, image=acc, command=acc_rec,height=25,width=25,relief=SOLID,cursor='hand2')
         acc_b.place(x=1145,y=30)
