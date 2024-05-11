@@ -37,6 +37,17 @@ def body():
     hm.geometry('1280x800')
     hm.configure(bg='lime')
     hm.attributes('-fullscreen',True)
+    
+    import mysql.connector as m
+    con=m.connect(host='localhost',user='root',passwd='pp1801',database='student_mgmt')
+    mycur=con.cursor()
+    mycur.execute('Select UserName,ins_name from credentials;')
+    data=mycur.fetchall()
+    ID=data[0][0]
+    IN=data[0][1]
+    
+    label_1=Label(hm,bg='cyan',bd=5,text=IN,font=('Cambria bold',30),relief=SOLID)
+    label_1.place(x=250,y=14)
 
 def signup():
     def register():
