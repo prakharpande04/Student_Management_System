@@ -1246,6 +1246,17 @@ dweep''','Puducherry')
     pwr_b.place(x=1235,y=30)
     t.bind_widget(pwr_b,balloonmsg='Close')
     
+    def logout():
+        global win1,win2,hm
+        ans1=messagebox.askokcancel('Warning','Are you sure you want to logout ?',parent=hm)
+        if ans1:
+            hm.destroy()
+            win1.destroy()
+            win2.destroy()
+    lg_out=PhotoImage(file='pwrbtn.png')
+    lgout_btn=Button(hm, image=lg_out,command=logout,height=25,width=25,relief=SOLID,cursor='hand2')
+    lgout_btn.place(x=1100,y=30)
+    t.bind_widget(lgout_btn,balloonmsg='LogOut')
 
 def signup():
     def register():
