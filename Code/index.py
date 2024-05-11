@@ -30,6 +30,13 @@ def l_message_3():
     messagebox.showinfo('Info',' Username does not exist ! ',parent=lgn)
     us_name_entry.delete(0,END)
     pas_entry.delete(0,END)
+    
+def body():
+    global hm,ID,IN
+    hm=Toplevel()
+    hm.geometry('1280x800')
+    hm.configure(bg='lime')
+    hm.attributes('-fullscreen',True)
 
 def signup():
     def register():
