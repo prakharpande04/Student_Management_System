@@ -316,7 +316,83 @@ dweep''','Puducherry')
                       bg='cyan',cursor='hand2',relief=SOLID,command=frame_6.destroy)
             b6.place(x=40,y=215)
         
+        c_pas=Button(acw, text=' Change Password ', command=change_paswd,
+                     relief=SOLID,bg='cyan',cursor='hand2')
+        c_pas.place(x=400,y=10)
+
+        pw_b1=Button(acw, text=' X ', command=acw.destroy,relief=SOLID,bg='tomato',cursor='hand2')
+        pw_b1.place(x=515,y=10)
+
+        import mysql.connector as c
+        conn=c.connect(host='localhost',user='root',
+                           passwd='pp1801',database='student_mgmt')
+        mycur=conn.cursor()
+        mycur.execute("Select * from credentials where UserName='{}';".format(ID))
+        get_val=mycur.fetchall()
+
+        ac_img = PhotoImage(file='acc_image.png')
+        ac_img_label=Label(acw,image=ac_img,height='75',width='75')
+        ac_img_label.place(x=180,y=20)
         
+        pf=Label(acw,text='User  Profile',bg='gold',font=('Calibri bold',20))
+        pf.place(x=160,y=110)
+
+        lb=Label(acw,text='',bg='gold')
+        
+        usr = Label(acw, text="Username                       : ",font=('Calibri',12),bg='gold')
+        usr.place(x=50,y=175)
+        r1 = Label(acw, text=get_val[0][0],font=('Calibri',12),bg='cyan')
+        r1.place(x=245,y=175)
+
+        afn = Label(acw, text="Affilation Number        : ",font=('Calibri',12),bg='gold')
+        afn.place(x=50,y=225)
+        r2 = Label(acw, text=get_val[0][2],font=('Calibri',12),bg='cyan')
+        r2.place(x=245,y=225)
+
+        ins = Label(acw, text="Institution Name           : ",font=('Calibri',12),bg='gold')
+        ins.place(x=50,y=275)
+        r3 = Label(acw, text=get_val[0][3],font=('Calibri',12),bg='cyan')
+        r3.place(x=245,y=275)
+
+        ins_type = Label(acw, text="Institution Type             : ",font=('Calibri',12),bg='gold')
+        ins_type.place(x=50,y=325)
+        r4 = Label(acw, text=get_val[0][4],font=('Calibri',12),bg='cyan')
+        r4.place(x=245,y=325)
+
+        ad = Label(acw, text="Institution Address        : ",font=('Calibri',12),bg='gold')
+        ad.place(x=50,y=375)
+        r5 = Label(acw, text=get_val[0][5],font=('Calibri',12),bg='cyan')
+        r5.place(x=245,y=375)
+
+        state = Label(acw, text="State                                :",font=('Calibri',12),bg='gold')
+        state.place(x=50,y=425)
+        r6 = Label(acw, text=get_val[0][6],font=('Calibri',12),bg='cyan')
+        r6.place(x=245,y=425)
+
+        pin = Label(acw, text="Pincode                          : ",font=('Calibri',12),bg='gold')
+        pin.place(x=50,y=475)
+        r7 = Label(acw, text=get_val[0][7],font=('Calibri',12),bg='cyan')
+        r7.place(x=245,y=475)
+
+        mail = Label(acw, text="Email ID                          : ",font=('Calibri',12),bg='gold')
+        mail.place(x=50,y=525)
+        r8 = Label(acw, text=get_val[0][8],font=('Calibri',12),bg='cyan')
+        r8.place(x=245,y=525)
+
+        cno = Label(acw, text="Contact No.                   : ",font=('Calibri',12),bg='gold')
+        cno.place(x=50,y=575)
+        r9 = Label(acw, text=get_val[0][9],font=('Calibri',12),bg='cyan')
+        r9.place(x=245,y=575)
+
+        def edit_pf():
+            usr_acc()
+            acw.destroy()
+            
+        b15=Button(acw,text="Edit Profile", height="2", width="20",font=('Calibri',12,'bold'),
+                   bg='cyan',cursor='hand2',command=edit_pf)
+        b15.place(x=150,y=630)
+
+        acw.mainloop()
         
         
         
