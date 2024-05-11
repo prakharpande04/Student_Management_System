@@ -1233,6 +1233,19 @@ dweep''','Puducherry')
         refsh=Button(frame_2,text='Refresh',width=9,command=refresh,cursor='hand2')
         refsh.place(x=630,y=10)
         
+    def exit_program():
+        global win1,win2,hm,w
+        ans1=messagebox.askokcancel('Warning','Are you sure you want to exit ?',parent=hm)
+        if ans1:
+            hm.destroy()
+            win1.destroy()
+            win2.destroy()
+            w.destroy()
+    pwr=PhotoImage(file='c1.png')
+    pwr_b=Button(hm, image=pwr, command=exit_program,height=26,width=26,relief=SOLID,cursor='hand2')
+    pwr_b.place(x=1235,y=30)
+    t.bind_widget(pwr_b,balloonmsg='Close')
+    
 
 def signup():
     def register():
