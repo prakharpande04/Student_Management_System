@@ -1512,5 +1512,6 @@ def account():
               cursor='hand2',command=login)
     b5.place(x=690,y=520)
 account()
+w.mainloop()
 
 # created by Prakhar Pande
