@@ -1257,6 +1257,11 @@ dweep''','Puducherry')
     lgout_btn=Button(hm, image=lg_out,command=logout,height=25,width=25,relief=SOLID,cursor='hand2')
     lgout_btn.place(x=1100,y=30)
     t.bind_widget(lgout_btn,balloonmsg='LogOut')
+    
+    std_data()
+    std_recs()
+    utilities()
+    hm.mainloop()
 
 def signup():
     def register():
