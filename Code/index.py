@@ -1403,6 +1403,28 @@ w=Tk()
 w.title('Student Management System ')
 w.attributes('-fullscreen',True)
 
+image1=PhotoImage(file='IMG-20220219-WA0002.png')
+label = Label(w, image=image1,width=1280,height=800).place(x=0,y=0)
+
+text = "  STUDENT  MANAGEMENT  SYSTEM   "
+label = Label(w, text=text,bg='orangered2',height='1',border='3',font=('Cambria bold italic',58),
+              fg='cyan').place(x=10,y=5)
+
+close=PhotoImage(file='c1.png')
+b3=Button(w, image=close, command=w.destroy,height=26,width=26,relief=SOLID,cursor='hand2')
+b3.place(x=1235,y=20)
+
+icf1=PhotoImage(file='min1.png')
+icf1b=Button(w, image=icf1, command=w.iconify,height=26,width=26,relief=SOLID,cursor='hand2')
+icf1b.place(x=1235,y=60)
+
+img=PhotoImage(file='Presentation1.png')
+l8=Label(w,image=img,height=200,width=200,bg='black')
+l8.place(x=540,y=280)
+
+dv_l=Label(w,bg='cyan',text='Developed By : PD Software Developers',font=18)
+dv_l.place(x=970,y=770)
+
 def login():
     def log():
         global lgn
