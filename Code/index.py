@@ -78,6 +78,14 @@ def body():
     icf_btn=Button(hm, image=icf, command=hm.iconify,height=26,width=26,relief=SOLID,cursor='hand2')
     icf_btn.place(x=1190,y=30)
     t.bind_widget(icf_btn,balloonmsg='Minimize')
+    
+    def acc_rec():
+        acc=PhotoImage(file='download - Copy.png')
+        acc_b=Button(hm, image=acc, command=acc_rec,height=25,width=25,relief=SOLID,cursor='hand2')
+        acc_b.place(x=1145,y=30)
+        t.bind_widget(acc_b,balloonmsg='User Account')
+
+        cal_logo=PhotoImage(file='cal_logo.png')
 
 def signup():
     def register():
