@@ -39,7 +39,7 @@ def body():
     hm.attributes('-fullscreen',True)
     
     import mysql.connector as m
-    con=m.connect(host='localhost',user='root',passwd='pp1801',database='student_mgmt')
+    con=m.connect(host='sql6.freemysqlhosting.net',user='sql6706105',passwd='lsregtItpA',database='sql6706105')
     mycur=con.cursor()
     mycur.execute('Select UserName,ins_name from credentials;')
     data=mycur.fetchall()
@@ -94,7 +94,7 @@ def body():
                 CNo=e10.get()
                 
                 import mysql.connector as c1
-                conn=c1.connect(host='localhost',user='root',passwd='pp1801',database='student_mgmt')
+                conn=c1.connect(host='sql6.freemysqlhosting.net',user='sql6706105',passwd='lsregtItpA',database='sql6706105')
                 mycur=conn.cursor()
                 q="""UPDATE credentials SET UserName=%s,Aff_No=%s, Ins_name=%s, Ins_type=%s, Ins_Ad=%s,
                     State=%s, PinCode=%s, Email=%s, Contact=%s  where UserName=%s;"""
@@ -184,8 +184,8 @@ dweep''','Puducherry')
             e10.place(x=220,y=345)
 
             import mysql.connector as c
-            conn=c.connect(host='localhost',user='root',
-                           passwd='pp1801',database='student_mgmt')
+            conn=c.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                           passwd='lsregtItpA',database='sql6706105')
             mycur=conn.cursor()
             mycur.execute("Select * from credentials where UserName='{}' ;".format(ID))
             get_val=mycur.fetchall()
@@ -224,8 +224,9 @@ dweep''','Puducherry')
                 p3=e3.get()
                 
                 import mysql.connector as c
-                conn=c.connect(host='localhost',user='root',
-                           passwd='pp1801',database='student_mgmt')
+                conn=c.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                           passwd='lsregtItpA',database='sql6706105')
+                print(conn.is_connected())
                 mycur=conn.cursor()
                 mycur.execute("Select Password from credentials where username='{}';".format(ID))
                 data=mycur.fetchone()
@@ -324,8 +325,8 @@ dweep''','Puducherry')
         pw_b1.place(x=515,y=10)
 
         import mysql.connector as c
-        conn=c.connect(host='localhost',user='root',
-                           passwd='pp1801',database='student_mgmt')
+        conn=c.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                           passwd='lsregtItpA',database='sql6706105')
         mycur=conn.cursor()
         mycur.execute("Select * from credentials where UserName='{}';".format(ID))
         get_val=mycur.fetchall()
@@ -468,10 +469,10 @@ dweep''','Puducherry')
             e14=ent14.get()
 
             import mysql.connector as c2
-            conn2=c2.connect(host='localhost',user='root',
-                        passwd='pp1801',database='student_mgmt')
+            conn2=c2.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                        passwd='lsregtItpA',database='sql6706105')
             mycur2=conn2.cursor()
-            mycur2.execute("""INSERT INTO STD_DETAILS VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}',
+            mycur2.execute("""INSERT INTO std_details VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}',
                                             '{}','{}','{}','{}')""".format(e1,e2,e3,e4,e5,e6,e7,e8,e9,e10,e11,e12,e13,e14))
             conn2.commit()
 
@@ -495,10 +496,10 @@ dweep''','Puducherry')
             global trvw
             trvw.delete(*trvw.get_children())
             import mysql.connector as c3
-            conn3=c3.connect(host='localhost',user='root',
-                        passwd='pp1801',database='student_mgmt')
+            conn3=c3.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                        passwd='lsregtItpA',database='sql6706105')
             mycur3=conn3.cursor()
-            mycur3.execute('SELECT * FROM STD_DETAILS;')
+            mycur3.execute('SELECT * FROM std_details;')
             data=mycur3.fetchall()
             
             for i in data:
@@ -638,10 +639,10 @@ dweep''','Puducherry')
                 del_id=ent1.get()
 
                 import mysql.connector as c4
-                conn4=c4.connect(host='localhost',user='root',
-                                passwd='pp1801',database='student_mgmt')
+                conn4=c4.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                                passwd='lsregtItpA',database='sql6706105')
                 mycur4=conn4.cursor()
-                mycur4.execute("DELETE FROM STD_DETAILS WHERE UNIQUE_STUDENT_ID='{}';".format(del_id))
+                mycur4.execute("DELETE FROM std_details WHERE UNIQUE_STUDENT_ID='{}';".format(del_id))
                 conn4.commit()
 
                 messagebox.showinfo('Success !','Record Deleted Successfully !',parent=frame_2)
@@ -650,10 +651,10 @@ dweep''','Puducherry')
                 global trvw
                 trvw.delete(*trvw.get_children())
                 
-                conn5=c4.connect(host='localhost',user='root',
-                            passwd='pp1801',database='student_mgmt')
+                conn5=c4.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                            passwd='lsregtItpA',database='sql6706105')
                 mycur5=conn5.cursor()
-                mycur5.execute('SELECT * FROM STD_DETAILS;')
+                mycur5.execute('SELECT * FROM std_details;')
                 data=mycur5.fetchall()
 
                 for i in data:
@@ -676,10 +677,10 @@ dweep''','Puducherry')
             e14=ent14.get()
             
             import mysql.connector as c6
-            conn6=c6.connect(host='localhost',user='root',
-                            passwd='pp1801',database='student_mgmt')
+            conn6=c6.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                            passwd='lsregtItpA',database='sql6706105')
             mycur6=conn6.cursor()
-            mycur6.execute("""UPDATE STD_DETAILS SET UNIQUE_STUDENT_ID='{}', STUDENT_NAME='{}',
+            mycur6.execute("""UPDATE std_details SET UNIQUE_STUDENT_ID='{}', STUDENT_NAME='{}',
                                             ADMISSION_NO='{}', ADMISSION_DATE='{}', DATE_OF_BIRTH='{}', GENDER='{}',
                                             CLASS='{}', FATHER_NAME='{}', MOTHER_NAME='{}', Aadhar_no='{}', Address='{}',
                                             CONTACT_NO='{}', EMAIL='{}', Mother_Tongue='{}' WHERE UNIQUE_STUDENT_ID=
@@ -689,10 +690,10 @@ dweep''','Puducherry')
             global trvw
             trvw.delete(*trvw.get_children())
             import mysql.connector as c7
-            conn7=c7.connect(host='localhost',user='root',
-                        passwd='pp1801',database='student_mgmt')
+            conn7=c7.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                        passwd='lsregtItpA',database='sql6706105')
             mycur7=conn7.cursor()
-            mycur7.execute('SELECT * FROM STD_DETAILS;')
+            mycur7.execute('SELECT * FROM std_details;')
             data=mycur7.fetchall()
 
             ent1.delete(0,END)
@@ -1066,10 +1067,10 @@ dweep''','Puducherry')
             trvw.delete(*trvw.get_children())
             
             import mysql.connector as c9
-            conn9=c9.connect(host='localhost',user='root',
-                        passwd='pp1801',database='student_mgmt')
+            conn9=c9.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                        passwd='lsregtItpA',database='sql6706105')
             mycur9=conn9.cursor()
-            mycur9.execute("SELECT * FROM STD_DETAILS WHERE "+sb+" LIKE '%"+sf+"%';")
+            mycur9.execute("SELECT * FROM std_details WHERE "+sb+" LIKE '%"+sf+"%';")
             data=mycur9.fetchall()
 
             for i in data:
@@ -1099,10 +1100,10 @@ dweep''','Puducherry')
         def show_all():
             trvw.delete(*trvw.get_children())
             import mysql.connector as c8
-            conn8=c8.connect(host='localhost',user='root',
-                        passwd='pp1801',database='student_mgmt')
+            conn8=c8.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                        passwd='lsregtItpA',database='sql6706105')
             mycur8=conn8.cursor()
-            mycur8.execute('SELECT * FROM STD_DETAILS;')
+            mycur8.execute('SELECT * FROM std_details;')
             data=mycur8.fetchall()
 
             for i in data:
@@ -1205,10 +1206,10 @@ dweep''','Puducherry')
         trvw.pack()
 
         import mysql.connector as c1
-        conn=c1.connect(host='localhost',user='root',
-                        passwd='pp1801',database='student_mgmt')
+        conn=c1.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                        passwd='lsregtItpA',database='sql6706105')
         mycur=conn.cursor()
-        mycur.execute('SELECT * FROM STD_DETAILS;')
+        mycur.execute('SELECT * FROM std_details;')
         
         a=0
         for i in mycur:
@@ -1221,10 +1222,10 @@ dweep''','Puducherry')
         def refresh():
             trvw.delete(*trvw.get_children())
             import mysql.connector as c3
-            conn=c3.connect(host='localhost',user='root',
-                        passwd='pp1801',database='student_mgmt')
+            conn=c3.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                        passwd='lsregtItpA',database='sql6706105')
             mycur=conn.cursor()
-            mycur.execute("SELECT * FROM STD_DETAILS ORDER BY  UNIQUE_STUDENT_ID ASC;")
+            mycur.execute("SELECT * FROM std_details ORDER BY  UNIQUE_STUDENT_ID ASC;")
             data=mycur.fetchall()
 
             for i in data:
@@ -1282,8 +1283,8 @@ def signup():
 
         
         import mysql.connector as c
-        conn=c.connect(host='localhost',user='root',
-                       passwd='pp1801',database='student_mgmt')
+        conn=c.connect(host='sql6.freemysqlhosting.net',user='sql6706105',
+                       passwd='lsregtItpA',database='sql6706105')
         mycur=conn.cursor()
         query1='INSERT INTO credentials VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
         val=(UN,PW,ANo,IN,IT,AD,ST,PC,EM,CNo)
@@ -1431,7 +1432,7 @@ def login():
         pasw=pas_entry.get()
         f=0
         import mysql.connector as c
-        conn=c.connect(host='localhost',user='root',passwd='pp1801',database='student_mgmt')
+        conn=c.connect(host='sql6.freemysqlhosting.net',user='sql6706105',passwd='lsregtItpA',database='sql6706105')
         csr=conn.cursor()
         csr.execute('SELECT UserName,Password FROM credentials;')
         cred=csr.fetchall()
